@@ -29,7 +29,8 @@ module.exports = {
 	bundle: {
 		invalid: "Invalid or incorrect Bundle",
 		no_url: "Missing or invalid url",
-		no_task: "Invalid or incorrect task specification"
+		no_task: "Invalid or incorrect task specification",
+		no_query: "Invalid or incorrect query specification",
 	},
 
 	type: {

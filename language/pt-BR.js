@@ -30,7 +30,8 @@ module.exports = {
 	bundle: {
 		invalid: "Bundle incorreto ou inválido",
 		no_url: "URL inválida ou não especificada",
-		no_task: "Tarefa não especificada ou inválida"
+		no_task: "Tarefa não especificada ou inválida",
+		no_query: "Query de busca inválida ou não especificada",
 	},
 
 	type: {
