@@ -57,7 +57,7 @@ module.exports = {
 
 	home: {
 
-		title: "Node Web Cluster",
+		title: "spidey.cloudbot.io",
 		message: "Bem vindo a pagina inicial do projeto!"
 	},
 

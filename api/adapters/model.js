@@ -293,6 +293,16 @@ var Model = function(type) {
 
 		else if(d == "null" || d == null)
 			return null
+		
+		else if(typeof d === typeof function(){}) {
+			
+			var r = d();
+			
+			if(r)
+				return r;
+			else
+				return d;
+		}
 
 		else
 			return d;
