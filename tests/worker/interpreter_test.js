@@ -24,14 +24,3 @@ exports.test_simpleMap = function(test){
     test.ok(map, "Map should be valid");
     test.done();
 }
-
-exports.test_simpleBundle = function(test){
-    
-    var bundle = new Bundle("scrapper", {
-		url: "http://google.com/search?q=%s", 
-		q: "node.js"
-	});
-    
- 	test.ok(bundle, "The bundle shoud be valid");
-    test.done();
-}

@@ -17,10 +17,7 @@ var Interpreter = function(map) {
 			var bundleName = map[task.bundle];
 			task.bundle = null;	
 			
-			var bundle = new Bundle(bundleName, task);
-			
-			bundle.setTask(task);
-			return bundle;
+			return new Bundle(bundleName, task);
 		}
 	}
 

@@ -17,6 +17,7 @@ var Bundle = function(name, task) {
 	var init = function(name) {
 		
 		getByName(name);
+		exports.setTask(task);
 		return exports;
 	}
 	
