@@ -27,7 +27,8 @@
     "format": "~0.2.1",
     "nom": "0.0.3",
     "util": "~0.4.9",
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "string": "~1.6.0"
   },
   "devDependencies": {
     "nodeunit": "~0.8.1"

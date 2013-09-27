@@ -1,6 +1,6 @@
 var Bundle = require("../../worker/bundles/bundle");
 
-exports.test_simpleBundle = function(test){
+exports.test_simpleScrapper = function(test){
     
     var bundle = new Bundle("scrapper", {
 		url: "http://google.com/search?q=%s", 

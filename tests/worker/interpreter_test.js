@@ -2,6 +2,12 @@ var interpreter = require("../../worker/bundles/interpreter");
 var map = require("../../worker/bundles/map");
 var Bundle = require("../../worker/bundles/bundle");
 
+exports.test_simpleMap = function(test){
+    
+    test.ok(map, "Map should be valid");
+    test.done();
+}
+
 exports.test_simpleInterpreter = function(test){
     
 	test.expect(1);
@@ -19,8 +25,19 @@ exports.test_simpleInterpreter = function(test){
 	});
 }
 
-exports.test_simpleMap = function(test){
+exports.test_complexScrapperInterpreter = function(test){
     
-    test.ok(map, "Map should be valid");
-    test.done();
+	test.expect(1);
+	
+    interpreter.get({
+		
+        bundle: "submarino",
+		q: "smartphone"
+		
+    }, function(items) {
+		
+		console.log(items);
+		test.ok(items, "Interpreter items should be valid");
+    	test.done();
+	});
 }

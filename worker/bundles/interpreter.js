@@ -1,6 +1,7 @@
 var map = require("./map");
 var lang = require("../../language").getDefault();
 var Bundle = require("./bundle");
+var extend = require("extend");
 
 var Interpreter = function(map) {
 	
@@ -17,7 +18,14 @@ var Interpreter = function(map) {
 			var bundleName = map[task.bundle];
 			task.bundle = null;	
 			
-			return new Bundle(bundleName, task);
+			if(typeof bundleName === typeof "str") {			
+				return new Bundle(bundleName, task);
+			}
+			else {
+				extend(task, bundleName);
+				bundleName = task.bundle;
+				return new Bundle(bundleName, task);
+			}
 		}
 	}
 

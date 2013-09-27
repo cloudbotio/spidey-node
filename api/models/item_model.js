@@ -13,6 +13,12 @@ module.exports = {
 		type: "string"
 	},
 	
+	url: {
+
+		required: true,
+		type: "string"
+	},
+	
 	pubDate: {
 
 		required: true,

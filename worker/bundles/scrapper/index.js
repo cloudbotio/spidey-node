@@ -1,6 +1,9 @@
 var util = require("util");
 var scrap = require("nom");
+//var string = require("string");
+
 var lang = require("../../../language").getDefault();
+var model = require("../../../api/adapters/model");
 
 var Scrapper = function(){
 	
@@ -33,7 +36,14 @@ var Scrapper = function(){
 			if(err)
 				throw new Error("Problem scrapping webpage: " + err.toString());
 			
-			cb($('title').text())
+			var items = [];
+			
+			items.push(model.create("item", {
+				title: $('title').text(),
+				content: "",//string($('body').text()).decodeHTMLEntities().s,
+			}));
+						
+			cb(items)
 		});
 		
 	}; exports.getItems = getItems;

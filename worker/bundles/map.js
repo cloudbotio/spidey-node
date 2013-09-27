@@ -12,8 +12,12 @@ module.exports = {
     buscape: "ecommerce/buscape",
     mercadolivre: "ecommerce/mercadolivre",
     
-    // ecommerce alias
-    submarino: {
+    // scrapper aliases
+	submarino: {
+        bundle: "scrapper",
+        url: "http://busca.submarino.com.br/busca.php?q=%s",
+    },
+    extra: {
         bundle: "scrapper",
         url: "http://buscando.extra.com.br/search?w=%s",
     },
