@@ -28,8 +28,19 @@ var Submarino = function(config){
 		
 		scrapper.get(function($){
 			
-			// TODO: implement Item conversion
-			cb($('title').text());			
+			// TODO: implement Item conversion for each product
+			var items = [];
+			
+			items.push(model.create("item", {
+							
+				title: string($('title').text()).humanize().s,
+				content: $('body').text(),
+				meta: {
+					q: task.q,
+					raw: $('html').html() || $('html').text() || ""
+				},
+				url: task.url
+			}));
 		});
 		
 	}; exports.getItems = getItems;
