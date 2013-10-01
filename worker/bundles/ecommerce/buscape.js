@@ -3,7 +3,7 @@ var request = require("request");
 var lang = require("../../../language").getDefault();
 
 var model = require("../../../api/adapters/model");
-var config = require("../../../config/bundles");
+var config = require("../../../config/bundles.json");
 
 var Buscape = function(){
 	
@@ -29,7 +29,8 @@ var Buscape = function(){
 		request(util.format(api_url, task.q), function (error, response, body) {
 			
 			if(error)
-				throw new Error("Problem scrapping webpage: " + err.toString());
+				throw new Error(util.format(lang.scrapper.problem, err.toString()) || 
+							"Problem scrapping webpage: " + err.message.toString());
 			
 			else if (response.statusCode == 200) {
 				
@@ -40,21 +41,34 @@ var Buscape = function(){
 					
 					var product = list[i].product;
 					
-					items.push(model.create("item", {
+					try {
 						
-						title: product.productshortname,
-						content: product.productshortname,
-						meta: {
+						if(!product.links || !product.links[0])
+							throw new Error("No url for product");
 							
-							sellers: product.totalsellers,
-							price: {
-								currency: product.currency.abbreviation,
-								value: product.pricemin,
-								offers: product.numoffers
-							}
+						var url = product.links[0].link.url;
 						
-						}						
-					}));
+						
+						items.push(model.create("item", {
+							
+							title: product.productshortname,
+							content: product.productshortname,
+							meta: {
+								
+								sellers: product.totalsellers,
+								price: {
+									currency: product.currency.abbreviation,
+									value: product.pricemin,
+									offers: product.numoffers
+								}
+							},
+							url: url
+						}));
+					}
+					catch(e) {
+						console.log("Problem creating item in Buscape Bundle. " + err.message.toString());
+						throw e;
+					}
 				}
 				
 				cb(items);

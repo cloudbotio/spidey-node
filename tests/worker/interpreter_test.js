@@ -16,7 +16,7 @@ exports.test_simpleInterpreter = function(test){
 		
         bundle: "scrapper",
 		url: "http://google.com/search?q=%s", 
-		q: "node.js"
+		q: "nodejs"
 		
     }, function(items) {
 		
@@ -36,7 +36,6 @@ exports.test_complexScrapperInterpreter = function(test){
 		
     }, function(items) {
 		
-		console.log(items);
 		test.ok(items, "Interpreter items should be valid");
     	test.done();
 	});

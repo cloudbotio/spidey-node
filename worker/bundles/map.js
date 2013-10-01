@@ -8,23 +8,9 @@ module.exports = {
     wine: "social/wine",
     
     // ecommerce bundles
-    ebay: "ecommerce/ebay",
     buscape: "ecommerce/buscape",
     mercadolivre: "ecommerce/mercadolivre",
-    
-    // scrapper aliases
-	submarino: {
-        bundle: "scrapper",
-        url: "http://busca.submarino.com.br/busca.php?q=%s",
-    },
-    extra: {
-        bundle: "scrapper",
-        url: "http://buscando.extra.com.br/search?w=%s",
-    },
-    americanas: {  
-        bundle: "scrapper",
-        url: "http://busca.americanas.com.br/busca.php?q=%s"
-    },
+	submarino: "ecommerce/submarino",
     
     // website bundles
     scrapper: "scrapper",

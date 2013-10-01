@@ -15,15 +15,13 @@ var Interpreter = function(map) {
 		
 		else {
 			
-			var bundleName = map[task.bundle];
-			task.bundle = null;	
+			var bundleName = map[task.bundle] || task.bundle;
 			
-			if(typeof bundleName === typeof "str") {			
+			if(typeof bundleName === typeof "str") {
+				task.bundle = null;	
 				return new Bundle(bundleName, task);
 			}
 			else {
-				extend(task, bundleName);
-				bundleName = task.bundle;
 				return new Bundle(bundleName, task);
 			}
 		}
