@@ -101,7 +101,7 @@ var Mercadolivre = function(){
 			else if (response.statusCode == 200) {
 				name = JSON.parse(body)["nickname"];
 			}
-		}
+		});
 
 		return name;
 	}
