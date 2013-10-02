@@ -36,8 +36,8 @@ var Submarino = function(config){
 				title: string($('title').text()).humanize().s,
 				content: $('body').text(),
 				meta: {
-					q: task.q,
-					raw: $('html').html() || $('html').text() || ""
+					price: 1231,
+					currency: "BRL"
 				},
 				url: task.url
 			}));
