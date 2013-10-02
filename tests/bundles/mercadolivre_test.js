@@ -1,8 +1,8 @@
 var Bundle = require("../../worker/bundles/bundle");
 
-exports.test_simpleMercadolivre = function(test){
+exports.test_simpleSubmarino = function(test){
 
-    var bundle = new Bundle("ecommerce/mercadolivre", {
+    var bundle = new Bundle("ecommerce/submarino", {
 		q: "smartphone"
 	});
 
