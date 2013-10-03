@@ -30,7 +30,8 @@
     "request": "~2.27.0",
     "string": "~1.6.0",
     "twitter": "~0.2.3",
-    "blindparser": "~0.1.1"
+    "blindparser": "~0.1.1",
+    "hoard": "~0.1.5"
   },
   "devDependencies": {
     "nodeunit": "~0.8.1"
