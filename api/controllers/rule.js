@@ -12,12 +12,14 @@ module.exports = {
 		policy(req, res).check(["authenticated"], function(){
 			try {		
 				
+				console.log(req.body);
+				
 				var rule = model.create("rule", {
 				
 					owner: req.cookies.user_id,
-					source: req.param("source"),
-					pipeline: req.param("pipeline"),
-					repeat: req.param("repeat")
+					source: req.body.source,
+					pipeline: req.body.pipeline,
+					repeat: req.body.repeat
 				
 				});
 					
@@ -45,6 +47,7 @@ module.exports = {
 				response(res).json({
 					result: "error",
 					message: e.message.toString(),
+					data: e,
 					code: 500
 				});
 			}

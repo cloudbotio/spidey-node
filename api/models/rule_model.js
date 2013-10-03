@@ -12,7 +12,7 @@ module.exports = {
 		required: true,
 		type: "object",
 		
-		validate(src) {
+		validate: function(src) {
 		
 			if(!src.bundle)
 				throw new Error("No bundle specified in Source");
@@ -25,11 +25,11 @@ module.exports = {
 
 		required: true,
 		type: "string",
-		defaultTo: 15 //minutes
+		defaultTo: 15, //minutes
 		
-		validate(p) {
+		validate: function(p) {
 		
-			if(p.indexOf("/"))
+			if(p.indexOf("/") == -1)
 				throw new Error("No pipeline method specified. Use a valid pipeline. Ex: 'content/tags'.");
 		
 			return true;		

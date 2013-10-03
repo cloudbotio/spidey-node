@@ -52,7 +52,7 @@ module.exports = {
 
 		required: true,
 		type: "string",
-		default: "user"
+		defaultTo: "user"
 	},
 
 	_sanitize: function(_this) {

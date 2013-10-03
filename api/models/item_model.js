@@ -23,7 +23,7 @@ module.exports = {
 
 		required: true,
 		type: "integer",
-		default: function(){
+		defaultTo: function(){
 			return new Date().toISOString()
 		}
 	},
@@ -32,7 +32,7 @@ module.exports = {
 		
 		required: true,
 		type: "object",
-		default: function(){
+		defaultTo: function(){
 			
 			var d = new Date();
 			
