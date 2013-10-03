@@ -40,5 +40,13 @@ module.exports = {
 
 		required: true,
 		type: "integer"
+	},
+	
+	next: {
+		
+		required: true,
+		type: "integer",
+		
+		defaultTo: (new Date((new Date()).getTime() + 15*60000)).toISOString()
 	}
 }

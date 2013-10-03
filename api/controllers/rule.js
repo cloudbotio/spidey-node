@@ -12,8 +12,6 @@ module.exports = {
 		policy(req, res).check(["authenticated"], function(){
 			try {		
 				
-				console.log(req.body);
-				
 				var rule = model.create("rule", {
 				
 					owner: req.cookies.user_id,
@@ -30,7 +28,7 @@ module.exports = {
 							result: "success",
 							message: "Rule created successfully!",
 							data: {
-								rule: rule.sanitize(rule)
+								rule: rule
 							}
 						});
 					}

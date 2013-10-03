@@ -390,7 +390,11 @@ var Model = function(type) {
 		var m = require("../models/" + name + "_model");
 
 		// check sanitizer
-		m.sanitize = m.sanitize || _sanitize || function(r){return r;};
+		if(m.sanitize)
+			m.sanitize = m.sanitize;
+		else
+			m.sanitize = _sanitize;
+		
 		m._sanitize = _sanitize;
 
 		var created = {}
