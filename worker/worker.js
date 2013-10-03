@@ -7,6 +7,7 @@ var Worker = function(q, t){
 	var exports = {};
 	var active = false;
 	var queue = q || require("./queue") || null;
+	var storage = require("./storage");
 
 	var refreshIntervalId = null; 
 	var timeout = t || DEFAULT_TIMEOUT;
@@ -34,6 +35,8 @@ var Worker = function(q, t){
 	var work = function() {
 
 		queue.get(function(task){
+			
+			// TODO: perform task
 			console.log(task.toString());
 		});
 

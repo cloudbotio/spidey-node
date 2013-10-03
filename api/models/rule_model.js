@@ -7,16 +7,33 @@ module.exports = {
 
 	},
 
-	bundle: {
-
+	source: {
+		
 		required: true,
-		type: "string"
+		type: "object",
+		
+		validate(src) {
+		
+			if(!src.bundle)
+				throw new Error("No bundle specified in Source");
+		
+			return true;		
+		}
 	},
 	
-	data: {
+	pipeline: {
 
 		required: true,
-		type: "object"
+		type: "string",
+		defaultTo: 15 //minutes
+		
+		validate(p) {
+		
+			if(p.indexOf("/"))
+				throw new Error("No pipeline method specified. Use a valid pipeline. Ex: 'content/tags'.");
+		
+			return true;		
+		}
 	},
 	
 	repeat: {
