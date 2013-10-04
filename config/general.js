@@ -21,7 +21,10 @@ module.exports = {
 
 			db: "main",
 			host: "localhost"
-		}
+		},
+		
+		workers: 1,
+		watchers: 1
 	},
 
 	test: {
@@ -42,7 +45,10 @@ module.exports = {
 
 			db: "main",
 			host: "localhost"
-		}
+		},
+		
+		workers: 1,
+		watchers: 1
 	},
 
 	production: {
@@ -58,6 +64,9 @@ module.exports = {
 
 			db: "main",
 			host: "localhost"
-		}
+		},
+		
+		workers: 1,
+		watchers: 1
 	}
 }

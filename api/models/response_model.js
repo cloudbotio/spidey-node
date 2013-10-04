@@ -18,7 +18,7 @@ module.exports = {
 
 		required: true,
 		type: "integer",
-		default: 200
+		defaultTo: 200
 
 	},
 
@@ -32,6 +32,6 @@ module.exports = {
 
 		required: true,
 		type: "object",
-		default: {}
+		defaultTo: {}
 	}
 }

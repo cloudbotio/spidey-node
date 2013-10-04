@@ -1,6 +1,6 @@
 {
-  "name": "node-web-cluster",
-  "version": "0.0.5",
+  "name": "spidey-cloudbot-io",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js",
@@ -8,6 +8,7 @@
     "stop": "node scripts/stopall.js",
     "debug": "node-inspector --web-port=3333 & node --debug-brk app",
     "test": "nodeunit tests/*",
+    "theseus": "./scripts/theseus.sh",
     "debug-test": "node-inspector --web-port=3333 & node --debug-brk `which nodeunit` tests/*",
     "start-server": "node scripts/single-server.js",
     "debug-server": "node-inspector --web-port=3333 & node --debug-brk scripts/single-server.js"
@@ -23,7 +24,17 @@
     "express-ejs-layouts": "~0.3.1",
     "ejs": "~0.8.4",
     "forever": "~0.10.8",
-    "format": "~0.2.1"
+    "format": "~0.2.1",
+    "nom": "0.0.3",
+    "util": "~0.4.9",
+    "request": "~2.27.0",
+    "string": "~1.6.0",
+    "twitter": "~0.2.3",
+    "blindparser": "~0.1.1",
+    "hoard": "~0.1.5",
+    "moment": "~2.2.1",
+    "natural": "~0.1.22",
+    "classifier": "~0.1.0"
   },
   "devDependencies": {
     "nodeunit": "~0.8.1"

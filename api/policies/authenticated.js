@@ -5,7 +5,8 @@ var lang = language.getDefault();
 
 module.exports = function(req, res, ok) {
 
-	if(req.cookies.authenticated == "true") {
+	if(req.cookies.authenticated == "true"
+	  && req.cookies.user_id) {
 
 		ok();
 	}

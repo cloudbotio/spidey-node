@@ -21,6 +21,17 @@ module.exports = {
 		not_found: "Page not found",
 		internal: "Internal server error",
 	},
+	
+	interpreter: {
+		no_bundle: "Invalid task, no bundle specified",
+	},
+	
+	bundle: {
+		invalid: "Invalid or incorrect Bundle",
+		no_url: "Missing or invalid url",
+		no_task: "Invalid or incorrect task specification",
+		no_query: "Invalid or incorrect query specification",
+	},
 
 	type: {
 
@@ -54,7 +65,7 @@ module.exports = {
 
 	home: {
 
-		title: "Node Web Cluster",
+		title: "spidey.cloudbot.io",
 		message: "Welcome to the index page!"
 	},
 

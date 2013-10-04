@@ -18,6 +18,9 @@ module.exports = {
 		"/api/user/signup": "user/signup",
 		"/api/user/login": "user/login",
 		"/api/user/logout": "user/logout",
+		
+		"/api/rule": "rule/get",
+		"/api/rule/get": "rule/get",
 
 		"/test/get": "test/get"
 	},
@@ -26,6 +29,10 @@ module.exports = {
 	 * POST methods
 	 */
 	"post": {
+		
+		// api
+		"/api/rule/create": "rule/create",
+		
 		"/test/post": "test/post"
 	},
 

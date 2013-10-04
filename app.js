@@ -25,6 +25,10 @@ var Cluster = function(cluster) {
 		if (cluster.isMaster) {
 
 			log.info((pjson.name || "web cluster") + " > starting infrastructure...");
+			
+			var workerManager = require("./worker");
+			workerManager.startAll();
+					
 
 			for (var i = 0; i < numCPUs; i++)
 				cluster.fork()
@@ -32,7 +36,7 @@ var Cluster = function(cluster) {
 			exports.cpus = numCPUs;
 
 			cluster.on('exit', function(worker, code, signal) {
-				console.log('worker ' + worker.process.pid + ' died');
+				console.log('server ' + worker.process.pid + ' died');
 			});
 
 			cb();
@@ -45,7 +49,7 @@ var Cluster = function(cluster) {
 			var server = new Server(function(server, app){
 				server.listen(app.get('port'), function(){
 					socket = new Socket(server);
-					log.info('worker listening on port ' + app.get('port'));
+					log.info('server listening on port ' + app.get('port'));
 				});
 			});
 		}
