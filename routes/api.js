@@ -20,7 +20,6 @@ module.exports = {
 		"/api/user/logout": "user/logout",
 		
 		"/api/rule": "rule/get",
-		"/api/rule/get": "rule/get",
 
 		"/test/get": "test/get"
 	},
