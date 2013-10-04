@@ -1,7 +1,12 @@
 module.exports = {
+<<<<<<< HEAD
 
 	state: "production",
 	lang: "en-US",
+=======
+	
+	state: "development",
+>>>>>>> v0.0.5 stable release
 
 	development: {
 

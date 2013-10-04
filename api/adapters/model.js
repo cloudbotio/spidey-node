@@ -428,7 +428,7 @@ var Model = function(type) {
 		// place timestamp by default
 		obj.timestamp = obj.timestamp || (new Date()).toISOString();
 
-		db.find({
+		return db.find({
 
 			_id: obj._id
 
@@ -473,10 +473,8 @@ var Model = function(type) {
 
 	}; exports.save = save;
 
-	function find(name, rest, cb) {
+	var find = function(name, rest, cb) {
 
-		name = name;
-		cb = cb || function(){};
 		rest = rest || {};
 
 		var m = require("../models/" + name + "_model");
@@ -485,23 +483,42 @@ var Model = function(type) {
 			if(m[k] && m[k].type == "password" && m[k].encryption !== false)
 				rest[k] = encrypt(rest[k], m[k].encryption)
 		}
-
-		var db = mongo.connect(name);
-
-		db.find(rest, function(err, docs) {
-
+		
+		var findCallback = function(err, docs, cb) {
+			
 			if(err) {
 				throw new Error((lang.database.query_error || "Problem querying database") +". "+ err.toString());
 			}
-
+	
 			for(var i = 0; i < docs.length; i++) {
-
+	
 				docs[i] = create(name, docs[i]);
 			}
-
+	
 			cb(docs || []);
+		};
 
-		});
+		var db = mongo.connect(name);
+		
+		var l = rest.limit || 0;
+		if(rest.limit) delete rest.limit
+		
+		if(rest.sort) {
+			var s = rest.sort;
+			delete rest.sort;
+			
+			return db.find(rest).sort(s, function(err, docs){
+				
+				findCallback(err, docs, cb);
+				
+			}).limit(l);
+		}
+		else
+			return db.find(rest, function(err, docs){
+				
+				findCallback(err, docs, cb);
+				
+			});
 
 	}; exports.find = find;
 	

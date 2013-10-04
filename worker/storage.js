@@ -27,9 +27,20 @@ var Manager = function() {
 		
 	}; exports.addItem = addItem;
 	
+	var getLastAnalysis = function(serie, cb) {
+		
+		return model.find("timeserie", {
+			
+			rule: serie,
+			limit: 1
+			
+		}, cb);
+		
+	}; exports.getLastAnalysis = getLastAnalysis;
+	
 	var getItems = function(serie, rest, cb) {
 		
-		return model.find("timeserie", rest, cb);		
+		return model.find("timeserie", rest, cb);
 		
 	}; exports.getItems = getItems;
 	

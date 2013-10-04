@@ -4,6 +4,8 @@ var policy = require("../policies/");
 
 var lang = require("../../language").getDefault();
 
+var workerStorage = require("../../worker/storage");
+
 module.exports = {
 	
 	// TODO: create method
@@ -57,24 +59,31 @@ module.exports = {
 		
 		try {
 			policy(req, res).check(["authenticated"], function() { 
+				
+				var rule = req.param("rule") || req.param("rule_id") ||
+					req.param("serie") || false;
+				
+				if(!rule)
+					throw new Error("No rule defined");
 
-				var _user = model.find("user",  {
-
-					_id: req.cookies.user_id
-
-				}, function(r) {
-
-					if(!r[0])
-						throw new Error(lang.error.internal || "Error selecting user")
-
-					response(res).json({
-
-						result: "success",
-						data: {
-							user: r[0]._sanitize(r[0])
-						}
-					});
-
+				workerStorage.getLastAnalysis(req.param("rule"), function(docs){
+					
+					if(docs && docs.length) {
+						response(res).json({
+							result: "success",
+							message: "Last analysis report for the specified rule",
+							data: docs[0].sanitize(docs[0])
+						});
+					}
+					else {
+						
+						response(res).json({
+							result: "error",
+							message: "The rule is invalid or could not be analysed yet",
+							code: 500
+						});
+					}
+					
 				});
 			})
 		}
@@ -84,7 +93,7 @@ module.exports = {
 			response(res).json({
 				result: "error",
 				message: e.message.toString()
-			})
+			});
 
 			return;
 		}
