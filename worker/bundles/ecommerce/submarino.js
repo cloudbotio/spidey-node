@@ -2,7 +2,7 @@ var Bundle = require("../bundle");
 var model = require("../../../api/adapters/model");
 var config = require("../../../config/bundles.json");
 
-var Submarino = function(config){
+var Submarino = function (config) {
 	
 	var exports = {};
 	var task = null;
@@ -27,24 +27,52 @@ var Submarino = function(config){
 		});
 		
 		scrapper.get(function($){
-			
-			// TODO: implement Item conversion for each product
+            
 			var items = [];
-			
-			items.push(model.create("item", {
-							
-				title: string($('title').text()).humanize().s,
-				content: $('body').text(),
-				meta: {
-					price: 1231,
-					currency: "BRL"
-				},
-				url: task.url
-			}));
+          
+            //build title array
+            var titles = $('.short-product-name');
+        
+            //build content array
+            var contents = $('.description');
+            
+            //build url array
+            var urls = $('.url');
+            
+            //build amount array
+            var amounts = regexExport($(".amount").text(), /[0-9:]/g);
+        
+            for(var i = 0;i<20; i++){
+                items.push(model.create("item", {
+                                
+                    title: $(titles[i]).text(),
+                    content: $(contents[i]).text().trim()!=="" ? $(contents[i]).text() : $(titles[i]).text() ,
+                    meta: {
+                        price: amounts[i+1],
+                        currency: "BRL"
+                    },
+                    url: $(urls[i]).attr().href.split("?link=")[1]
+                }));
+                
+            }
+            cb(items);
 		});
 		
 	}; exports.getItems = getItems;
 	
+    //export price from $('.amount').text selector in submarino and americanas search
+    var regexExport = function extractSummary(iCalContent, patt) {
+        var match = iCalContent.match(patt);
+        var result = match.join().replace(/,/g,"");
+        result = result.split(":");
+        delete result[0];
+        for(var j=1; j<=20; j++){
+            result[j] = [result[j].slice(0, result[j].length-2), ".", result[j].slice(result[j].length-2)].join('');
+            result[j] = parseFloat(result[j]);
+        }
+        return result;
+    }
+    
 	var init = function(config) {
 		return exports;
 	};
