@@ -16,7 +16,7 @@ module.exports = {
 				
 					owner: req.cookies.user_id,
 					source: req.body.source,
-					pipeline: req.body.pipeline,
+					tunnel: req.body.tunnel,
 					repeat: req.body.repeat
 				
 				});

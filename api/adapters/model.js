@@ -504,7 +504,43 @@ var Model = function(type) {
 		});
 
 	}; exports.find = find;
+	
+	function findAndModify(name, rest, set, cb) {
 
+		name = name;
+		cb = cb || function(){};
+		rest = rest || {};
+
+		var m = require("../models/" + name + "_model");
+
+		for(var k in rest) {
+			if(m[k] && m[k].type == "password" && m[k].encryption !== false)
+				rest[k] = encrypt(rest[k], m[k].encryption)
+		}
+
+		var db = mongo.connect(name);
+
+		db.findAndModify({
+			query: rest,
+			update: set,
+			new: false
+		}, function(err, docs) {
+
+			if(err) {
+				throw new Error((lang.database.query_error || "Problem querying database") +". "+ err.toString());
+			}
+
+			for(var i = 0; i < docs.length; i++) {
+
+				docs[i] = create(name, docs[i]);
+			}
+
+			cb(docs || []);
+
+		});
+
+	}; exports.findAndModify = findAndModify;
+	
 	function remove(name, rest, cb) {
 
 		name = name;

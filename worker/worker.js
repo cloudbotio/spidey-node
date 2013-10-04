@@ -1,8 +1,15 @@
+var log = require("winston");
+
+var bundleInterpreter = require("./bundles/interpreter");
+
+var PipelineInterpreter = require("./pipelines/interpreter");
+var pipelineInterpreter = new PipelineInterpreter();
+
 var Worker = function(q, t){
 
 	// autostart
 	var START_ON_INIT = false;
-	var DEFAULT_TIMEOUT = 15000;
+	var DEFAULT_TIMEOUT = 5000;
 
 	var exports = {};
 	var active = false;
@@ -13,7 +20,7 @@ var Worker = function(q, t){
 	var timeout = t || DEFAULT_TIMEOUT;
 
 	var start = function(timeout) {
-
+		
 		active = true;
 		timeout = timeout || DEFAULT_TIMEOUT;
 
@@ -36,11 +43,25 @@ var Worker = function(q, t){
 
 		queue.get(function(task){
 			
-			// TODO: perform task
-			console.log(task.toString());
+			log.info("worker says: new task found! (rule: '"+task._id+"')");
+			
+			var _t = task;
+			
+			bundleInterpreter.get(task.source, function(items) {
+				analysis(items, _t);
+			});
 		});
 
 	}; exports.work = work;
+	
+	var analysis = function(items, task) {
+		
+		pipelineInterpreter.input(task.tunnel	, items);
+
+		pipelineInterpreter.result(function(result){
+			log.info(result);
+		});
+	};
 
 	var isActive = function(){
 
@@ -49,7 +70,7 @@ var Worker = function(q, t){
 	}; exports.isActive = isActive;
 
 	var stop = function() {
-
+		
 		active = false;
 
 	}; exports.stop = stop;
@@ -58,7 +79,7 @@ var Worker = function(q, t){
 
 		if(START_ON_INIT)
 			start();
-
+		
 		return exports;
 	};
 

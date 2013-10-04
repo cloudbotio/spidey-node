@@ -12,6 +12,9 @@ var http = require('http');
 var path = require('path');
 var expressLayouts = require('express-ejs-layouts');
 
+var workerManager = require("../worker");
+workerManager.startAll();	
+
 var Server = function(cb) {
 
 	cb = cb || function(){};

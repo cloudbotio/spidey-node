@@ -21,25 +21,25 @@ module.exports = {
 		}
 	},
 	
-	pipeline: {
+	tunnel: {
 
 		required: true,
-		type: "string",
-		defaultTo: 15, //minutes
+		type: "object",
 		
 		validate: function(p) {
 		
-			if(p.indexOf("/") == -1)
-				throw new Error("No pipeline method specified. Use a valid pipeline. Ex: 'content/tags'.");
-		
-			return true;		
+			if(!p.steps || !p.steps.length)
+				throw new Error("No pipeline steps specified.");
+			else
+				return true;		
 		}
 	},
 	
 	repeat: {
 
 		required: true,
-		type: "integer"
+		type: "integer",
+		defaultTo: 15
 	},
 	
 	next: {
@@ -47,6 +47,6 @@ module.exports = {
 		required: true,
 		type: "integer",
 		
-		defaultTo: (new Date((new Date()).getTime() + 15*60000)).toISOString()
+		defaultTo: (new Date()).getTime()
 	}
 }
