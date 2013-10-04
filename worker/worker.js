@@ -5,6 +5,8 @@ var bundleInterpreter = require("./bundles/interpreter");
 var PipelineInterpreter = require("./pipelines/interpreter");
 var pipelineInterpreter = new PipelineInterpreter();
 
+var storage = require("./storage");
+
 var Worker = function(q, t){
 
 	// autostart
@@ -56,10 +58,16 @@ var Worker = function(q, t){
 	
 	var analysis = function(items, task) {
 		
-		pipelineInterpreter.input(task.tunnel	, items);
+		pipelineInterpreter.input(task.tunnel, {result: items});
 
 		pipelineInterpreter.result(function(result){
-			log.info(result);
+			
+			log.info("worker says: task done successfully! (rule: '"+task._id+"')");
+			
+			storage.addItem({
+				rule: task._id,
+				values: result
+			});
 		});
 	};
 

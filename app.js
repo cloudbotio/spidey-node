@@ -25,6 +25,9 @@ var Cluster = function(cluster) {
 		if (cluster.isMaster) {
 
 			log.info((pjson.name || "web cluster") + " > starting infrastructure...");
+			
+			var workerManager = require("./worker");
+			workerManager.startAll();
 					
 
 			for (var i = 0; i < numCPUs; i++)

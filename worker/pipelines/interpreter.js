@@ -24,9 +24,9 @@ module.exports = function(){
 		return new p(c);
 	}
 
-	function input(input, context){
+	function input(input, ctx){
 
-		context = context || {};
+		context = ctx || {};
 		var rule = input;
 
 		// ------  time shortcuts ------ //

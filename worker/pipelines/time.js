@@ -1,11 +1,11 @@
-var s = require("../config/time");
+var s = require("../../config/time");
 var moment = require("moment");
 moment().format();
 
 // s = time span
 // ex: s.minute = 60 //seconds
 
-module.exports = function(entity, context){
+module.exports = function(context){
 
 	var exports = {};
 

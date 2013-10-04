@@ -1,4 +1,4 @@
-module.exports = function(entity, context){
+module.exports = function(context){
 	
 	var exports = {};
 
@@ -27,14 +27,25 @@ module.exports = function(entity, context){
 							res[j].min = res[j].min == null ? value : (value < res[j].min ? value : res[j].min);
 							res[j].max = res[j].max == null ? value : (value > res[j].max ? value : res[j].max);
 						}
+						else if(meta[j].value && typeof meta[j].value === typeof 0.0) {
+							
+							var value = parseFloat(meta[j].value);
+							res[j] = res[j] || {};
+							res[j].sum = value + (res[j].sum != null ? res[j].sum : 0);
+							res[j].cnt = 1 + (res[j].cnt != null ? res[j].cnt : 0);
+							res[j].min = res[j].min == null ? value : (value < res[j].min ? value : res[j].min);
+							res[j].max = res[j].max == null ? value : (value > res[j].max ? value : res[j].max);
+						}
 					}
 				}
 			}
 		}
 		for(var k in res) {
+			
 			res[k].medium = res[k].sum / res[k].cnt;
 			delete res[k].sum;
 			delete res[k].cnt;
+			
 		}
 			
 		if(res)

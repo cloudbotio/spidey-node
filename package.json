@@ -31,7 +31,10 @@
     "string": "~1.6.0",
     "twitter": "~0.2.3",
     "blindparser": "~0.1.1",
-    "hoard": "~0.1.5"
+    "hoard": "~0.1.5",
+    "moment": "~2.2.1",
+    "natural": "~0.1.22",
+    "classifier": "~0.1.0"
   },
   "devDependencies": {
     "nodeunit": "~0.8.1"

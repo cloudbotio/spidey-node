@@ -58,7 +58,7 @@ var Buscape = function(){
 								sellers: product.totalsellers,
 								price: {
 									currency: product.currency.abbreviation,
-									value: product.pricemin,
+									value: parseFloat(product.pricemin),
 									offers: product.numoffers
 								}
 							},

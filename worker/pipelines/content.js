@@ -1,7 +1,7 @@
 var S = require('string');
 var natural = require('natural');
 var classifier = require('classifier');
-var config = require('../config/text');
+var config = require('../../config/text');
 var state = config[config.state];
 
 var async = require("async");
@@ -28,6 +28,10 @@ module.exports = function(context){
 
 			//iterate over all items
 			for(var i = 0; i < items.length; i++) {
+				
+				if(!items[i].text) 
+					items[i].text = items[i].title + items[i].content;
+				
 				items[i].text = S(items[i].text).stripTags().s;
 				wordexists(hist, items[i].text);
 			}
