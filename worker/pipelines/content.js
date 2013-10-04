@@ -63,59 +63,10 @@ module.exports = function(context){
 
 	}; exports.tags = tags;
 
-
-	function frequency(input, cb) {
-
-		var tfidf = new TfIdf();
-
-		var res = {};
-
-		cb = cb || fn;
-
-		for(var k in context) {
-
-			var hist = {};
-			var items = context[k] || [];
-
-			var data = input.data;
-
-			//iterate over all items
-			for(var it = 0; it < items.length; it++) {
-				items[it].content = S(items[it].content).stripTags().s;
-				tfidf.addDocument(items[it].content);
-
-				hist[items[it]._id] = hist[items[it]._id] || {};
-
-				// iterate over all words
-				for(var j = 0; j < data.length; j++){
-					hist[items[it]._id][data[j]] = tfidf.tfidf(data[j], it);
-				}
-			}
-
-			res[k] = hist;
-		}
-
-		var res_arr = {};
-
-		for(var j in res) {
-
-			res_arr[j] = res_arr[j] || [];
-
-			for(var k in res[j]) {
-				res_arr[j].push({id:k, value:res[j][k]});
-			}
-
-			res_arr[j] = res_arr[j].slice(0, (res[j].length > 10 ? 10 : res[j].length));
-		}
-
-		cb(res_arr);
-
-	}; exports.frequency = frequency;
-
 	function sentiment(input, cb) {
 
 		var res = {};
-		var sentiment = require("../config/text/sentiment");
+		var sentiment = require("../../config/text/sentiment");
 
 		cb = cb || fn;
 
